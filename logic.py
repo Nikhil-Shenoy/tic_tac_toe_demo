@@ -1,30 +1,35 @@
-
+import pprint
 import board
-
-root = [['u' for i in range(3)] for j in range(3)]
-
-player = 'x'
+import copy
 
 def is_win(b):
 
 		config = b.config
 
 		if config[0][0] == config[0][1] == config[0][2]:
-			return True
+			if config[0][0] == "x" or config[0][0] == "o":
+				return True
 		elif config[1][0] == config[1][1] == config[1][2]:
-			return True
+			if config[1][0] == "x" or config[1][0] == "o":
+				return True
 		elif config[2][0] == config[2][1] == config[2][2]:
-			return True
+			if config[2][0] == "x" or config[2][0] == "o":
+				return True
 		elif config[0][0] == config[1][0] == config[2][0]:
-			return True
+			if config[0][0] == "x" or config[0][0] == "o":
+				return True
 		elif config[0][1] == config[1][1] == config[2][1]:
-			return True
+			if config[0][1] == "x" or config[0][1] == "o":
+				return True
 		elif config[0][2] == config[1][2] == config[2][2]:
-			return True
+			if config[0][2] == "x" or config[0][2] == "o":
+				return True
 		elif config[0][0] == config[1][1] == config[2][2]:
-			return True
+			if config[0][0] == "x" or config[0][0] == "o":
+				return True
 		elif config[0][2] == config[1][1] == config[2][0]:
-			return True
+			if config[0][2] == "x" or config[0][2] == "o":
+				return True
 		else:
 			return False
 
@@ -43,12 +48,10 @@ def find_open_spaces(b):
 
 	for i in range(3):
 		for j in range(3):
-			if b[x][y] == 'u':
-				spaces.append((x,y))
+			if b.config[i][j] == 'u':
+				spaces.append((i,j))
 
 	return spaces
-
-tree = board.Board(root)
 
 def generate_tree(b,player):
 
@@ -60,9 +63,13 @@ def generate_tree(b,player):
 	open_spaces = find_open_spaces(b)
 
 	for space in open_spaces:
-		child = board.Board(b.config)
-		child.set_val(space[0],space[1],player)
+		child = board.Board(copy.deepcopy(b.config))
+		# child.display()
+		# print '\n\n'
+		child.set_value(space[0],space[1],player)
+		# child.display()
 		b.children.append(child)
+
 
 	if player == "x":
 		opposing_player = "o"
@@ -84,4 +91,16 @@ def generate_tree(b,player):
 
 	'''
 
+
+if __name__ == '__main__':
+
+	pp = pprint.PrettyPrinter()
+
+	root = [['u' for i in range(3)] for j in range(3)]
+	player = 'x'
+
+	tree = board.Board(root)
+	tree.display()
+
+	generate_tree(tree,player)
 
