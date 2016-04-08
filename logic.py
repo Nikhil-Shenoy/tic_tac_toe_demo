@@ -9,29 +9,28 @@ def is_win(b):
 		if config[0][0] == config[0][1] == config[0][2]:
 			if config[0][0] == "x" or config[0][0] == "o":
 				return True
-		elif config[1][0] == config[1][1] == config[1][2]:
+		if config[1][0] == config[1][1] == config[1][2]:
 			if config[1][0] == "x" or config[1][0] == "o":
 				return True
-		elif config[2][0] == config[2][1] == config[2][2]:
+		if config[2][0] == config[2][1] == config[2][2]:
 			if config[2][0] == "x" or config[2][0] == "o":
 				return True
-		elif config[0][0] == config[1][0] == config[2][0]:
+		if config[0][0] == config[1][0] == config[2][0]:
 			if config[0][0] == "x" or config[0][0] == "o":
 				return True
-		elif config[0][1] == config[1][1] == config[2][1]:
+		if config[0][1] == config[1][1] == config[2][1]:
 			if config[0][1] == "x" or config[0][1] == "o":
 				return True
-		elif config[0][2] == config[1][2] == config[2][2]:
+		if config[0][2] == config[1][2] == config[2][2]:
 			if config[0][2] == "x" or config[0][2] == "o":
 				return True
-		elif config[0][0] == config[1][1] == config[2][2]:
+		if config[0][0] == config[1][1] == config[2][2]:
 			if config[0][0] == "x" or config[0][0] == "o":
 				return True
-		elif config[0][2] == config[1][1] == config[2][0]:
+		if config[0][2] == config[1][1] == config[2][0]:
 			if config[0][2] == "x" or config[0][2] == "o":
 				return True
-		else:
-			return False
+		return False
 
 def is_full(b):
 
