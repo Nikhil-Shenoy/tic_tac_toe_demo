@@ -4,7 +4,26 @@ def main():
   pygame.init()
   screen = pygame.display.set_mode((480, 480))
   
+  ## initial variables
+  mousedown = False
+  mousepos = (0, 0)
+
   while True:
+    
+    # event handler
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        return
+      elif event.type == pygame.MOUSE_BUTTON_DOWN:
+        mousedown = True
+        mousepos = event.pos
+      elif event.type == pygame.MOUSE_BUTTON_UP:
+        mousedown = False
+        mousepos = event.pos
+
+    if mousedown:
+      print mousepos
     screen.fill((0, 0, 0))
     pygame.display.flip()
 
