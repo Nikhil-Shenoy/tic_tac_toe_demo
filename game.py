@@ -15,10 +15,10 @@ def main():
       if event.type == pygame.QUIT:
         pygame.quit()
         return
-      elif event.type == pygame.MOUSE_BUTTON_DOWN:
+      elif event.type == pygame.MOUSEBUTTONDOWN:
         mousedown = True
         mousepos = event.pos
-      elif event.type == pygame.MOUSE_BUTTON_UP:
+      elif event.type == pygame.MOUSEBUTTONUP:
         mousedown = False
         mousepos = event.pos
 
