@@ -6,12 +6,16 @@ class Board:
 		self.utility = 0
 		self.config = config
 		self.children = list()
+<<<<<<< HEAD
+		self.minimax_value = 0
+=======
 		self.boardimage = pygame.image.load("img/board2.png").convert_alpha()
 		self.ximage = pygame.image.load("img/x2.png").convert_alpha()
 		self.oimage = pygame.image.load("img/o2.png").convert_alpha()
 
 	def get_value(self,x,y):
 		return self.config[x][y]
+>>>>>>> 7bc0cb499c6b2dfee7417c58a45432d2f967bca0
 
 	def set_value(self,x,y,val):
 		self.config[x][y] = val
