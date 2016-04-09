@@ -1,6 +1,7 @@
 import pprint
 import board
 import copy
+import pygame
 
 '''
 Assumptions:
@@ -85,7 +86,6 @@ def generate_tree(b,player):
 	for child in b.children:
 		generate_tree(child,opposing_player)
 
-
 	'''
 	for each open space on the current board:
 		generate a new board
@@ -152,28 +152,38 @@ def heuristic(conf,player):
 
 def minimax(node,depth,player):
 	if depth == 0 or not node.children:
-		return node.utility
+		return node.utility, [node]
 
 	if player == 'o':
 		best_value = -1000000
+		path = []
 		for child in node.children:
-			v = minimax(child,depth-1,'x')
-			best_value = max(best_value,v)
+			v, p = minimax(child,depth-1,'x')
+			if v > best_value:
+				best_value = v
+				path = p
 
 		node.minimax_value = best_value
-		return best_value
+		node.minimax_node = path[0]
+		return best_value, [node] + path
 	else:
 		best_value = 1000000
+		path = []
 		for child in node.children:
-			v = minimax(child,depth-1,'o')
-			best_value = min(best_value,v)
+			v, p = minimax(child,depth-1,'o')
+			if v < best_value:
+				best_value = v
+				path = p
 
 		node.minimax_value = best_value
-		return best_value
+		node.minimax_node = path[0]
+		return best_value, [node] + path
 
 
 if __name__ == '__main__':
 
+	pygame.init()
+	screen = pygame.display.set_mode((1,1))
 	pp = pprint.PrettyPrinter()
 
 	root = [['u' for i in range(3)] for j in range(3)]
@@ -186,7 +196,7 @@ if __name__ == '__main__':
 	determine_depth(tree,0)
 	# print "The maximum depth is {0}".format(max_depth)
 
-	best_val = minimax(tree,max_depth,player)
+	best_val, path = minimax(tree,max_depth,player)
 	vals = list()
 	for child in tree.children:
 		vals.append(child.minimax_value)	
