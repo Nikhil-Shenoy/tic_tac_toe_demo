@@ -66,7 +66,7 @@ if __name__ == "__main__":
   #print "Welcome to Tic-Tac-Toe!\nWe\'ll fill in more description about usage here"
 
   pygame.init()
-  screen = pygame.display.set_mode((960, 480))
+  screen = pygame.display.set_mode((960, 480),pygame.FULLSCREEN)
   clock = pygame.time.Clock()
   mousedown = False
   mousepos = (0, 0)
@@ -112,6 +112,10 @@ if __name__ == "__main__":
         elif event.type == pygame.MOUSEBUTTONUP:
           mousedown = False
           mousepos = event.pos
+        elif event.type == pygame.KEYDOWN:
+          if event.key == pygame.K_ESCAPE:
+            pygame.quit()
+            sys.exit(1)
 
       if turn == player:
       # get the id of the clicked square and place it
